@@ -19,8 +19,7 @@ db = SQLAlchemy(metadata=metadata)
 
 class Zookeeper(db.Model, SerializerMixin):
     __tablename__ = 'zookeepers'
-
-    # don't forget that every tuple needs at least one comma!
+    
     serialize_rules = ('-animals.zookeeper',)
 
     id = db.Column(db.Integer, primary_key=True)
@@ -32,9 +31,9 @@ class Zookeeper(db.Model, SerializerMixin):
 
 class Enclosure(db.Model, SerializerMixin):
     __tablename__ = 'enclosures'
-
+    
     serialize_rules = ('-animals.enclosure',)
-
+    
     id = db.Column(db.Integer, primary_key=True)
     environment = db.Column(db.String)
     open_to_visitors = db.Column(db.Boolean)
@@ -44,7 +43,7 @@ class Enclosure(db.Model, SerializerMixin):
 
 class Animal(db.Model, SerializerMixin):
     __tablename__ = 'animals'
-
+    
     serialize_rules = ('-zookeeper.animals', '-enclosure.animals',)
 
     id = db.Column(db.Integer, primary_key=True)
